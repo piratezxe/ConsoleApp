@@ -12,9 +12,10 @@ namespace Sms
     {
         static void Main(string[] args)
         {
-            IFtpClient ftpClient = new DiscClient();
-            IImportService importService = new DiscImportService(ftpClient, "C:\\Users\\Karol\\Desktop\\ftp", "C:\\Users\\Karol\\Desktop\\local");
-            importService.ImportRecord("C:\\Users\\Karol\\Desktop\\ftp", "C:\\Users\\Karol\\Desktop\\local");
+            IFtpClient ftpClient = new FtpClient("ftp://test.rebex.net/","demo", "password");
+            IImportService importService = new FtpImportService(ftpClient);
+            //importService.ImportRecord("ftp://test.rebex.net/pub/example/", "C:\\Users\\Karol\\Desktop\\local");
+            importService.ImportRecord("ftp://test.rebex.net/pub/", "C:\\Users\\Karol\\Desktop\\local");
         }
     }
 }

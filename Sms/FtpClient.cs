@@ -5,11 +5,11 @@ namespace Sms
 {
     public class FtpClient : IFtpClient
     {
-        public string HostName { get; private set; }
+        public string HostName { get; set; }
 
-        public string UserName { get; private set; }
+        public string UserName { get; set; }
 
-        public string Password { get; private set; }
+        public string Password { get; set; }
 
         public FtpClient(string hostName, string userName, string password)
         {
@@ -42,6 +42,10 @@ namespace Sms
     }
     public class DiscClient : IFtpClient
     {
+        public string HostName { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public string UserName { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public string Password { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
         public void Download(string file, string destination)
         {
             Directory.CreateDirectory(Path.GetDirectoryName(destination));

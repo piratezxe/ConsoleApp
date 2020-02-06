@@ -8,6 +8,9 @@ namespace Sms
 {
     public interface IFtpClient
     {
+        string HostName { get; set; }
+        string UserName { get; set; }
+        string Password { get; set; }
         void Download(string file, string destination);
     }
 }
