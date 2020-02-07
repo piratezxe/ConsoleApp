@@ -35,8 +35,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -48,13 +53,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DiscImportService.cs" />
-    <Compile Include="FtpClient.cs" />
+    <Compile Include="FOO.cs" />
+    <Compile Include="SFtpClient.cs" />
     <Compile Include="FtpImportService.cs" />
-    <Compile Include="IFtpClient.cs" />
+    <Compile Include="IFileExtract.cs" />
+    <Compile Include="ISftpClient.cs" />
     <Compile Include="IImportService.cs" />
+    <Compile Include="IXmlService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

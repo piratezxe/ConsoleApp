@@ -2,9 +2,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Sms
 {
@@ -12,10 +14,12 @@ namespace Sms
     {
         static void Main(string[] args)
         {
-            IFtpClient ftpClient = new FtpClient("ftp://test.rebex.net/","demo", "password");
-            IImportService importService = new FtpImportService(ftpClient);
-            //importService.ImportRecord("ftp://test.rebex.net/pub/example/", "C:\\Users\\Karol\\Desktop\\local");
-            importService.ImportRecord("ftp://test.rebex.net/pub/", "C:\\Users\\Karol\\Desktop\\local");
+
+            //IXmlService xmlService = new XmlService();
+            //var data = xmlService.GetObjectFromPath<Foo>("C:\\Users\\Karol\\Desktop\\Nowy folder\\new2.xml");
+
+            IImportService importService = new SFtpImportService(new SFtpClient("", "", ""), new FileExtract(), new XmlService());
+            importService.ImportSms(@"C:\Users\Karol\Desktop\Source", @"C:\Users\Karol\Desktop\target", "new1");
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sms
 {
-    public interface IFtpClient
+    public interface ISFtpClient
     {
         string HostName { get; set; }
         string UserName { get; set; }

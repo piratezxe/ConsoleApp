@@ -7,51 +7,39 @@ using WinSCP;
 
 namespace Sms
 {
-    class FtpImportService : IImportService
+    public class SFtpImportService : IImportService
     {
-        private readonly IFtpClient _ftpClient;
-        public FtpImportService(IFtpClient ftpClient)
+        private readonly ISFtpClient _ftpClient;
+
+        private readonly IFileExtract _fileExtract;
+
+        private readonly IXmlService _xmlService;
+
+        public SFtpImportService(ISFtpClient ftpClient, IFileExtract fileExtract, IXmlService xmlService)
         {
             _ftpClient = ftpClient;
+            _fileExtract = fileExtract;
+            _xmlService = xmlService;
         }
         public void ImportRecord(string source, string destination)
         {
-            NetworkCredential credentials = new NetworkCredential(_ftpClient.UserName, _ftpClient.Password);
-            DownloadFtpDirectory(source, credentials, destination);
         }
 
-        public void ImportSms(string source, string destination)
+        public void ImportSms(string source, string destination, string zipName)
         {
-            throw new System.NotImplementedException();
-        }
-        void DownloadFtpDirectory(string url, NetworkCredential credentials, string localPath)
-        {
-            // Setup session options
-            SessionOptions sessionOptions = new SessionOptions
+            //pobranie na zasoby
+
+            var sourceZipPath = Path.Combine(destination, zipName + ".zip");
+            var destinationZipPath = Path.Combine(destination, zipName);
+
+            _fileExtract.ExtractFile(sourceZipPath, destinationZipPath);
+
+            string[] files = Directory.GetFiles(destination, "*.xml", SearchOption.AllDirectories);
+
+            foreach (var file in files)
             {
-                Protocol = Protocol.Ftp,
-                HostName = "test.rebex.net",
-                UserName = credentials.UserName,
-                Password = credentials.Password
-            };
-
-            using (Session session = new Session())
-            {
-                // Connect
-                session.Open(sessionOptions);
-
-                // List files
-
-                foreach(var a  in session.EnumerateRemoteFiles("/", null, EnumerationOptions.AllDirectories))
-                {
-                    var filePath = a.FullName;
-                    var fileName = a.Name;
-                }
-
-                //IEnumerable<string> list =
-                //    session.EnumerateRemoteFiles("/", null, EnumerationOptions.None).
-                //    Select(fileInfo => fileInfo.FullName);
-                //var cos = list.Count();
+                var sms = _xmlService.GetObjectFromPath<Foo>(file);
+                //sms zapis do bazy danych
             }
         }
     }
