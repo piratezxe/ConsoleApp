@@ -1,5 +1,6 @@
 ﻿
 
+using Sms.data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,10 +15,6 @@ namespace Sms
     {
         static void Main(string[] args)
         {
-
-            //IXmlService xmlService = new XmlService();
-            //var data = xmlService.GetObjectFromPath<Foo>("C:\\Users\\Karol\\Desktop\\Nowy folder\\new2.xml");
-
             IImportService importService = new SFtpImportService(new SFtpClient("", "", ""), new FileExtract(), new XmlService());
             importService.ImportSms(@"C:\Users\Karol\Desktop\Source", @"C:\Users\Karol\Desktop\target", "new1");
         }
