@@ -28,6 +28,8 @@ namespace Sms
         public void ImportSms(string source, string destination, string zipName)
         {
             //pobranie na zasoby
+            //_ftpClient.Download(Path.Combine(source, zipName), Path.Combine(destination, zipName));
+
 
             var sourceZipPath = Path.Combine(destination, zipName + ".zip");
             var destinationZipPath = Path.Combine(destination, zipName);
