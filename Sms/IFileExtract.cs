@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SharpCompress.Archives;
+using SharpCompress.Common;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -32,19 +34,14 @@ namespace Sms
     {
         public void ExtractFile(string zipPath, string extractPath)
         {
-            string zPath = "7za.exe"; //add to proj and set CopyToOuputDir
-            try
+            System.IO.Directory.CreateDirectory(extractPath);
+            using (var archive = ArchiveFactory.Open(zipPath))
             {
-                ProcessStartInfo pro = new ProcessStartInfo();
-                pro.WindowStyle = ProcessWindowStyle.Hidden;
-                pro.FileName = zPath;
-                pro.Arguments = string.Format("x \"{0}\" -y -o\"{1}\"", zipPath, extractPath);
-                Process x = Process.Start(pro);
-                x.WaitForExit();
-            }
-            catch (System.Exception Ex)
-            {
-                //handle error
+                foreach (var entry in archive.Entries)
+                {
+                    if (!entry.IsDirectory)
+                        entry.WriteToDirectory(extractPath, new ExtractionOptions() { ExtractFullPath = true, Overwrite = true });
+                }
             }
         }
     }
