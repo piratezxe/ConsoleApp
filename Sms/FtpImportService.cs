@@ -27,14 +27,14 @@ namespace Sms
 
         public void ImportSms(string source, string destination, string zipName)
         {
-            //pobranie na zasoby
-            //_ftpClient.Download(Path.Combine(source, zipName), Path.Combine(destination, zipName));
-
-
-            var sourceZipPath = Path.Combine(destination, zipName + ".zip");
             var destinationZipPath = Path.Combine(destination, zipName);
 
-            _fileExtract.ExtractFile(sourceZipPath, destinationZipPath);
+            //pobranie na zasoby
+            //_ftpClient.Download(Path.Combine(source, zipName), destinationZipPath);
+
+
+            var zipPath = Path.Combine(destination, zipName + ".zip");
+            _fileExtract.ExtractFile(zipPath, destinationZipPath);
 
             string[] files = Directory.GetFiles(destination, "*.xml", SearchOption.AllDirectories);
 
