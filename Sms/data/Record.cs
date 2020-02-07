@@ -21,5 +21,15 @@ namespace Sms.data
         public string recDirection { get; set; }
 
         public DateTime establishedTime { get ; set; }
+
+//        <?xml version = "1.0" ?>
+//< Foo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+//  <BarList>
+//    <Bar>
+//      <Property1>abc</Property1>
+//      <Property2>def</Property2>
+//    </Bar>
+//  </BarList>
+//</Foo>
     }
 }
